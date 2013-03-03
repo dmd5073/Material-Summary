@@ -9,7 +9,6 @@ class record :
             self.qty=getInt("Please entery a quantity",0)
 
         self.desc = str(desc)
-        print "desc:"+desc
         self.measurement = str(measurement)
 
 def main (inputfilename,outputfilename):
