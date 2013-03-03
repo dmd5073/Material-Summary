@@ -9,6 +9,7 @@ class record :
             self.qty=getInt("Please entery a quantity",0)
 
         self.desc = str(desc)
+        print "desc:"+desc
         self.measurement = str(measurement)
 
 def main (inputfilename,outputfilename):
@@ -31,6 +32,8 @@ def main (inputfilename,outputfilename):
         desc = str(line[descIdx])
         markNo = line[markNoIdx]
         try:
+            if markNo.lower() == "x":
+                continue;
             markNo = int(markNo)
         except ValueError, TypeError:
             print "mark number:"+str(markNo)+" wasn't valid.  I QUIT!"
@@ -47,8 +50,6 @@ def main (inputfilename,outputfilename):
             fileData[markNo] = myRecord 
         else:
             print "not new mark number"
-            print myRecord
-            print fileData[markNo]
             if myRecord.desc!=fileData[markNo].desc:
                 which = getInt("Which desc would you like to use?\n1)"+myRecord.desc+"\n2)"+fileData[markNo].desc, 1, 2)
                 if(which==1):
@@ -59,7 +60,7 @@ def main (inputfilename,outputfilename):
                 if(which==1):
                     fileData[markNo].measurement = myRecord.measurement
 
-            fileData[markNo] = fileData[markNo].qty + myRecord.qty
+            fileData[markNo].qty = fileData[markNo].qty + myRecord.qty
         
         print ""
 
@@ -93,5 +94,3 @@ if(len(sys.argv)<minargs):
   sys.exit()
 
 main(sys.argv[inputFileNameArg], sys.argv[outputFileNameArg])
-
-
